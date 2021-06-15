@@ -37,5 +37,19 @@
     "sass-loader": "^8.0.2",
     "typescript": "~4.1.5",
     "vue-jest": "^5.0.0-0"
-  }
+  },
+	"jest-stare": {
+		"resultDir": "results",
+		"resultJson": "jest-results.json",
+		"coverageLink": "../coverage/lcov-report/index.html"
+	},
+	"prettier": {
+		"arrowParens": "avoid",
+		"bracketSpacing": true,
+		"jsxBracketSameLine": false,
+		"printWidth": 140,
+		"singleQuote": true,
+		"semi": true,
+		"trailingComma": "none"
+	}
 }
