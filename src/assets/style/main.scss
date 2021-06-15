@@ -1,0 +1,111 @@
+$md: nth(nth($grid-breakpoints, 3), 2);
+
+body {
+  background: $dark !important;
+  color: $light !important;
+  height: 100%;
+  font-family: Yantraanav, 'Helvetica Neue', sans-serif;
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: $dark;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: $primary;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $primary;
+  font-family: 'Space Mono', Verdana, sans-serif;
+}
+
+.important {
+  &::before,
+  &::after {
+    content: '';
+    color: $primary;
+    font-size: 1.5em;
+  }
+  &::before {
+    content: '<';
+    margin-right: 5px;
+  }
+  &::after {
+    content: '>';
+    margin-left: 5px;
+  }
+}
+::selection {
+  color: $light !important;
+  background: $primary !important;
+}
+.tooltip-title {
+  position: relative;
+  .tooltip-text {
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    padding: 1em 1.5em;
+    visibility: hidden;
+    border-radius: 6px;
+    background: darken($dark, 5%);
+    color: $light;
+    text-align: center;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 1;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: darken($dark, 5%) transparent transparent transparent;
+    }
+  }
+
+  &:hover {
+    .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .small-underline-#{$color} {
+    @include gradient-x(darken($value, 50%), $value);
+    background-repeat: no-repeat;
+    background-size: 25% 0.025em;
+    background-position: 2% 100%;
+    transition: 0.5s ease;
+    &:hover {
+      background-size: 50% 0.05em;
+    }
+  }
+}
+
+@media screen and (max-width: $md) {
+  h1 {
+    font-size: 2rem;
+  }
+  .tooltip-title {
+    position: inherit;
+    .tooltip-text {
+      display: none;
+    }
+  }
+}
