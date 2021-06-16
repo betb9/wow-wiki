@@ -46,4 +46,28 @@ export default class CustomAxios {
     };
     return axios(config as AxiosRequestConfig).then((res: AxiosResponse) => res.data);
   }
+  /**
+   * Return an Axios instance prepared to work properly with Battle.net API
+   * @param parameters BNetParameters
+   * @param baseUrl base API URL
+   * @return CustomAxios instance
+   */
+  static async build(parameters: BNetParameters, baseUrl?: string): Promise<CustomAxios> {
+    const region = parameters.region || 'eu';
+    const host = CustomAxios.getHost(region);
+    const authorizationURL = parameters.authorizationURL || `https://${host}/oauth/authorize`;
+    const tokenURL = parameters.tokenURL || `https://${host}/oauth/token`;
+    const credentials = await CustomAxios.getCredentials(axios.create(), {
+      url: tokenURL,
+      grant_type: 'client_credentials',
+      client_id: process.env.VUE_APP_BNET_ID,
+      client_secret: process.env.VUE_APP_BNET_SECRET,
+      scope: parameters.scope || ''
+    });
+    parameters.token = credentials.access_token;
+    parameters.authorizationURL = authorizationURL;
+    parameters.tokenURL = tokenURL;
+
+    return new CustomAxios(parameters, baseUrl || `https://${CustomAxios.getHost(region, UrlFetchType.Api)}`);
+  }
 }
