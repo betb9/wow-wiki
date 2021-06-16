@@ -1,5 +1,6 @@
-import axios, { AxiosInstance } from 'axios';
-import { BNetParameters, UrlFetchType } from '@/utils/types.ts';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { BNetParameters, OauthCredentials, TokenResponse, UrlFetchType } from '@/utils/types.ts';
+import qs from 'qs';
 
 export default class CustomAxios {
   bnetParameters: BNetParameters;
@@ -29,5 +30,20 @@ export default class CustomAxios {
     } else {
       return type === UrlFetchType.Oauth ? `${region}.battle.net` : `${region}.api.blizzard.com`;
     }
+  }
+  /**
+   * Return credentials to use the Battle.net API
+   * @param axios instance
+   * @param url OAuth URL
+   * @param credentials OAuth credentials
+   * @return Promise<TokenResponse>
+   */
+  static async getCredentials(axios: AxiosInstance, { url, ...credentials }: OauthCredentials): Promise<TokenResponse> {
+    const config = {
+      url,
+      method: 'post',
+      data: qs.stringify(credentials)
+    };
+    return axios(config as AxiosRequestConfig).then((res: AxiosResponse) => res.data);
   }
 }
