@@ -10,10 +10,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "axios-oauth-client": "^1.4.2",
     "bootstrap": "^5.0.1",
     "core-js": "^3.6.5",
-    "passport": "^0.4.1",
-    "passport-bnet": "^2.0.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0"
   },
