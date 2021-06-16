@@ -27,3 +27,9 @@ export enum UrlFetchType {
   Api,
   Oauth
 }
+
+export enum BNetNamespace {
+  Static,
+  Dynamic,
+  Profile
+}
