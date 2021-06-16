@@ -8,6 +8,7 @@ export type OauthCredentials = {
 
 export type BNetParameters = {
   region?: Region;
+  namespace?: RegionNamespace;
   locale?: string;
   scope?: string;
   authorizationURL?: string;
@@ -41,3 +42,5 @@ export enum Region {
   Taiwan = 'tw',
   China = 'cn'
 }
+
+export type RegionNamespace = `${BNetNamespace}-${Region}`;
