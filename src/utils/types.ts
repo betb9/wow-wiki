@@ -22,3 +22,8 @@ export type TokenResponse = {
   sub: string;
   token_type: string;
 };
+
+export enum UrlFetchType {
+  Api,
+  Oauth
+}
