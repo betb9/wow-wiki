@@ -9,7 +9,7 @@ export type OauthCredentials = {
 export type BNetParameters = {
   region?: Region;
   namespace?: RegionNamespace;
-  locale?: string;
+  locale?: BNetLocale;
   scope?: string;
   authorizationURL?: string;
   tokenURL?: string;
@@ -27,6 +27,21 @@ export type TokenResponse = {
 export enum UrlFetchType {
   Api,
   Oauth
+}
+
+export enum BNetLocale {
+  EnglishUnitedStates = 'en_US',
+  SpanishMexico = 'en_MX',
+  Portuguese = 'pt_BR',
+  German = 'de_DE',
+  EnglishGreatBritain = 'en_GB',
+  SpanishSpain = 'es_ES',
+  French = 'fr_FR',
+  Italian = 'it_IT',
+  Russian = 'ru_RU',
+  Korean = 'ko_KR',
+  ChineseTraditional = 'zh_TW',
+  ChineseSimplified = 'zh_CN'
 }
 
 export enum BNetNamespace {
