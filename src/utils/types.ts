@@ -29,7 +29,15 @@ export enum UrlFetchType {
 }
 
 export enum BNetNamespace {
-  Static,
-  Dynamic,
-  Profile
+  Static = 'static',
+  Dynamic = 'dynamic',
+  Profile = 'profile'
+}
+
+export enum Region {
+  NorthAmerica = 'us',
+  Europe = 'eu',
+  Korea = 'kr',
+  Taiwan = 'tw',
+  China = 'cn'
 }
