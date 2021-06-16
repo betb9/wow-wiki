@@ -5,6 +5,7 @@ export type OauthCredentials = {
   client_secret: string;
   scope?: string;
 };
+
 export type BNetParameters = {
   region?: string;
   locale?: string;
@@ -12,4 +13,12 @@ export type BNetParameters = {
   authorizationURL?: string;
   tokenURL?: string;
   token?: string;
+};
+
+export type TokenResponse = {
+  access_token: string;
+  expires_in: number;
+  scope?: string;
+  sub: string;
+  token_type: string;
 };
