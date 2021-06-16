@@ -7,7 +7,7 @@ export type OauthCredentials = {
 };
 
 export type BNetParameters = {
-  region?: string;
+  region?: Region;
   locale?: string;
   scope?: string;
   authorizationURL?: string;

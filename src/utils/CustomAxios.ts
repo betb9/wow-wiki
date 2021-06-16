@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { BNetParameters, OauthCredentials, TokenResponse, UrlFetchType } from '@/utils/types.ts';
+import { BNetParameters, OauthCredentials, Region, TokenResponse, UrlFetchType } from '@/utils/types.ts';
 import qs from 'qs';
 
 export default class CustomAxios {
@@ -20,12 +20,12 @@ export default class CustomAxios {
 
   /**
    * Return appropriate domain name to retrieve the OAuth token or API data
-   * @param region string
+   * @param region Region
    * @param type UrlFetchType
    * @return string host URL
    */
-  static getHost(region: string, type = UrlFetchType.Oauth): string {
-    if (region === 'cn') {
+  static getHost(region: Region, type = UrlFetchType.Oauth): string {
+    if (region === Region.China) {
       return type === UrlFetchType.Oauth ? 'www.battlenet.com.cn' : 'gateway.battlenet.com.cn';
     } else {
       return type === UrlFetchType.Oauth ? `${region}.battle.net` : `${region}.api.blizzard.com`;
@@ -53,7 +53,7 @@ export default class CustomAxios {
    * @return CustomAxios instance
    */
   static async build(parameters: BNetParameters, baseUrl?: string): Promise<CustomAxios> {
-    const region = parameters.region || 'eu';
+    const region = parameters.region || Region.Europe;
     const host = CustomAxios.getHost(region);
     const authorizationURL = parameters.authorizationURL || `https://${host}/oauth/authorize`;
     const tokenURL = parameters.tokenURL || `https://${host}/oauth/token`;
