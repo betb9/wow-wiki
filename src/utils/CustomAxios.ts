@@ -5,18 +5,32 @@ import qs from 'qs';
 export default class CustomAxios {
   bnetParameters: BNetParameters;
   baseURL: string;
-  instance: AxiosInstance;
+  instance: AxiosInstance | null = null;
 
   constructor(parameters: BNetParameters, baseUrl: string) {
     this.bnetParameters = parameters;
     this.baseURL = baseUrl;
-    this.instance = axios.create({
-      baseURL: this.baseURL,
-      params: {
-        access_token: parameters.token,
-        locale: parameters.locale
-      }
-    });
+    this.getInstance(true, baseUrl);
+  }
+
+  /**
+   * Get singleton instance
+   * @param getNewInstance create or not a new instance
+   * @param baseUrl
+   * @return AxiosInstance
+   */
+  getInstance(getNewInstance?: boolean, baseUrl?: string): AxiosInstance {
+    if (!this.instance || getNewInstance) {
+      this.instance = axios.create({
+        baseURL: baseUrl || this.baseURL,
+        params: {
+          access_token: this.bnetParameters.token,
+          locale: this.bnetParameters.locale
+        }
+      });
+      return this.instance;
+    }
+    return this.instance;
   }
 
   /**
