@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Class, ClassesList } from '@/utils/ClassesTypes';
+import { Class, ClassesList, ClassMedia } from '@/utils/ClassesTypes';
 
 /**
  * Return all Classes from BNet API
@@ -24,9 +24,22 @@ async function getClass(oauthClient: AxiosInstance, classId: number, parameters?
   return response.data;
 }
 
+/**
+ * Return media for given classId
+ * @param oauthClient
+ * @param classId
+ * @param parameters
+ * @return Promise<ClassMedia>
+ */
+async function getClassMedia(oauthClient: AxiosInstance, classId: number, parameters?: AxiosRequestConfig): Promise<ClassMedia> {
+  const response: AxiosResponse<ClassMedia> = await oauthClient.get<ClassMedia>(`/data/wow/media/playable-class/${classId}`, parameters);
+  return response.data;
+}
+
 export function useClassService() {
   return {
     getClassesList,
-    getClass
+    getClass,
+    getClassMedia
   };
 }
