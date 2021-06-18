@@ -6,6 +6,20 @@ export type OauthCredentials = {
   scope?: string;
 };
 
+export interface BNetLink {
+  href: string;
+}
+
+export interface BNetSelf {
+  self: BNetLink;
+}
+
+export interface BNetRef {
+  key: BNetLink;
+  name?: string;
+  id: number;
+}
+
 export type BNetParameters = {
   region?: Region;
   namespace?: RegionNamespace;
