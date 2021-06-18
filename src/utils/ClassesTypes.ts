@@ -21,3 +21,8 @@ export interface ClassMedia {
   assets: Array<Record<string, string | number>>;
   id: number;
 }
+
+export interface ClassPVPTalent {
+  _links: BNetSelf;
+  talent_slots: Array<Record<string, number>>;
+}
