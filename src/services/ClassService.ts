@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Class, ClassesList, ClassMedia } from '@/utils/ClassesTypes';
+import { Class, ClassesList, ClassMedia, ClassPVPTalent } from '@/utils/ClassesTypes';
 
 /**
  * Return all Classes from BNet API
@@ -36,10 +36,29 @@ async function getClassMedia(oauthClient: AxiosInstance, classId: number, parame
   return response.data;
 }
 
+/**
+ * Return slots for pvp talent for the given classId
+ * @param oauthClient
+ * @param classId
+ * @param parameters
+ */
+async function getClassPVPTalentSlots(
+  oauthClient: AxiosInstance,
+  classId: number,
+  parameters?: AxiosRequestConfig
+): Promise<ClassPVPTalent> {
+  const response: AxiosResponse<ClassPVPTalent> = await oauthClient.get<ClassPVPTalent>(
+    `/data/wow/playable-class/${classId}/pvp-talent-slots`,
+    parameters
+  );
+  return response.data;
+}
+
 export function useClassService() {
   return {
     getClassesList,
     getClass,
-    getClassMedia
+    getClassMedia,
+    getClassPVPTalentSlots
   };
 }
