@@ -15,3 +15,9 @@ export interface Class {
   media: BNetRef;
   pvp_talent_slots: BNetLink;
 }
+
+export interface ClassMedia {
+  _links: BNetSelf;
+  assets: Array<Record<string, string | number>>;
+  id: number;
+}
