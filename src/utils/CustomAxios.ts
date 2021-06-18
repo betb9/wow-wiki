@@ -1,5 +1,14 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { BNetLocale, BNetParameters, OauthCredentials, Region, TokenResponse, UrlFetchType } from '@/utils/types.ts';
+import {
+  BNetLocale,
+  BNetNamespace,
+  BNetParameters,
+  OauthCredentials,
+  Region,
+  RegionNamespace,
+  TokenResponse,
+  UrlFetchType
+} from '@/utils/types.ts';
 import qs from 'qs';
 
 export default class CustomAxios {
@@ -25,7 +34,8 @@ export default class CustomAxios {
         baseURL: baseUrl || this.baseURL,
         params: {
           access_token: this.bnetParameters.token,
-          locale: this.bnetParameters.locale
+          locale: this.bnetParameters.locale,
+          namespace: this.bnetParameters.namespace
         }
       });
       return this.instance;
@@ -83,6 +93,7 @@ export default class CustomAxios {
     parameters.authorizationURL = authorizationURL;
     parameters.tokenURL = tokenURL;
     parameters.locale = parameters.locale || BNetLocale.EnglishGreatBritain;
+    parameters.namespace = parameters.namespace || (`${BNetNamespace.Static}-${region}` as RegionNamespace);
 
     return new CustomAxios(parameters, baseUrl || `https://${CustomAxios.getHost(region, UrlFetchType.Api)}`);
   }
