@@ -6,18 +6,22 @@ export type OauthCredentials = {
   scope?: string;
 };
 
-export interface BNetLink {
-  href: string;
+export interface BNetApiResponse {
+  _links: BNetSelf;
 }
 
-export interface BNetSelf {
-  self: BNetLink;
+export interface BNetLink {
+  href: string;
 }
 
 export interface BNetRef {
   key: BNetLink;
   name?: string;
   id: number;
+}
+
+export interface BNetSelf {
+  self: BNetLink;
 }
 
 export type BNetParameters = {

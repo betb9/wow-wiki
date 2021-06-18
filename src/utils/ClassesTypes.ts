@@ -1,12 +1,10 @@
-import { BNetLink, BNetRef, BNetSelf } from '@/utils/types';
+import { BNetApiResponse, BNetLink, BNetRef } from '@/utils/types';
 
-export interface ClassesList {
-  _links: BNetSelf;
+export interface ClassesList extends BNetApiResponse {
   classes: Array<BNetRef>;
 }
 
-export interface Class {
-  _links: BNetSelf;
+export interface Class extends BNetApiResponse {
   id: number;
   name: string;
   gender_name: Record<string, string>;
@@ -16,13 +14,11 @@ export interface Class {
   pvp_talent_slots: BNetLink;
 }
 
-export interface ClassMedia {
-  _links: BNetSelf;
+export interface ClassMedia extends BNetApiResponse {
   assets: Array<Record<string, string | number>>;
   id: number;
 }
 
-export interface ClassPVPTalent {
-  _links: BNetSelf;
+export interface ClassPVPTalent extends BNetApiResponse {
   talent_slots: Array<Record<string, number>>;
 }
